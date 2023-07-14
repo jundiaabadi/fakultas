@@ -206,3 +206,10 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+textarea {
+        resize: none;
+        height: auto;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }

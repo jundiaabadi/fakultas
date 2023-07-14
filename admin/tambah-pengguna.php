@@ -31,7 +31,7 @@ include 'header.php'
     </style>
 </heavscode-file:>
 
-<div class="content" style="min-height: 5000px;">
+<div class="content">
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
@@ -64,11 +64,23 @@ include 'header.php'
                 <?php
                 if(isset($_POST['submit'])){
                     $nama = addslashes(ucwords($_POST['nama']));
-                    $user = $_POST['user'];
+                    $user = addslashes($_POST['user']);
                     $level = $_POST['level'];
                     $pass = 'unpriteknik';
 
-                    $simpan = mysqli_query($conn, "INSERT INTO pengguna VALUES (
+                    $cek = mysqli_query($conn, "SELECT username FROM pengguna WHERE username='".$user."' ");
+                    if(mysqli_num_rows($cek) > 0 ){
+                         echo '<script>document.addEventListener("DOMContentLoaded", function() {
+                        Swal.fire({
+                        icon: "error",
+                        title: "Username Sudah Digunakan!!!",
+                        showConfirmButton: true,
+                        timer: 6000
+                    });
+                });
+              </script>';
+                    } else {
+                        $simpan = mysqli_query($conn, "INSERT INTO pengguna VALUES (
                         null,
                         '".$nama."',
                         '".$user."',
@@ -91,6 +103,10 @@ include 'header.php'
     } else {
         echo 'Gagal Disimpan!!' . mysqli_error($conn);
     }
+                        
+                    }
+
+                    
                   
                 }
                 ?>

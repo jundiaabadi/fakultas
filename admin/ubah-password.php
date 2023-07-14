@@ -3,11 +3,8 @@ include 'header.php';
 
 if (isset($_GET['idpengguna'])) {
     $userID = $_GET['idpengguna'];
-   
+
     $pengguna = mysqli_query($conn, "SELECT * FROM pengguna WHERE id = '$userID'");
-    if(mysqli_num_rows($pengguna) == 0) {
-        echo '<script>window.location="pengguna.php"</script>';
-    }
     $data = mysqli_fetch_array($pengguna);
 }
 ?>
@@ -17,46 +14,49 @@ if (isset($_GET['idpengguna'])) {
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h4>Edit Pengguna</h4>
+                <h4>Ubah Password</h4>
             </div>
             <div class="card-body">
                 <form accept="" method="post">
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama"
-                            value="<?= $data['nama'] ?>" required>
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="pass1" class="form-control" id="pass1"
+                            placeholder="Masukkan Password" required>
                     </div>
                     <div class="mb-3">
-                        <label for="user" class="form-label">Username</label>
-                        <input type="text" name="user" class="form-control" id="user" placeholder="Masukkan Username"
-                            value="<?= $data['username'] ?>" required>
+                        <label for="password" class="form-label">Konfirmasi Password</label>
+                        <input type="password" name="pass2" class="form-control" id="pass2"
+                            placeholder="Masukkan Password Kembali" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="level" class="form-label">Level</label>
-                        <select name="level" class="form-select" id="level" style="max-width: 150px" required>
-                            <option value="">Pilih</option>
-                            <option value="Super Admin" <?= ($data['level'] == 'Super Admin') ? 'selected' : '' ?>>Super
-                                Admin</option>
-                            <option value="Admin" <?= ($data['level'] == 'Admin') ? 'selected' : '' ?>>Admin</option>
-                        </select>
-                    </div>
+
                     <a href="pengguna.php" class="btn btn-secondary my-3">Kembali</a>
-                    <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
+                    <input type="submit" name="submit" value="Ubah Password" class="btn btn-primary">
                 </form>
                 <?php
                 if (isset($_POST['submit'])) {
-                    $nama = addslashes(ucwords($_POST['nama']));
-                    $user = addslashes($_POST['user']);
-                    $level = $_POST['level'];
-
-                    $update = mysqli_query($conn, "UPDATE pengguna SET nama='$nama', username='$user', level='$level' WHERE id='$userID'");
+                    $pass1 = addslashes($_POST['pass1']);
+                    $pass2 = addslashes($_POST['pass2']);
+                    if($pass2 != $pass1) {
+                         echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>';
+                        echo '<script>
+                            Swal.fire({
+                                icon: "error",
+                                title: "Password Tidak Sesuai",
+                                showConfirmButton: true,
+                                timer: 6000
+                            }).then(() => {
+                                window.location.href = "ubah-password.php";
+                            });
+                        </script>';
+                    }else {
+                         $update = mysqli_query($conn, "UPDATE pengguna SET password='".MD5($pass1)."' WHERE id='".$_SESSION['uid']."' ");
 
                     if ($update) {
                         echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>';
                         echo '<script>
                             Swal.fire({
                                 icon: "success",
-                                title: "Berhasil Diubah",
+                                title: "Berhasil Mengubah Password",
                                 showConfirmButton: true,
                                 timer: 6000
                             }).then(() => {
@@ -66,6 +66,9 @@ if (isset($_GET['idpengguna'])) {
                     } else {
                         echo "Gagal mengubah pengguna.";
                     }
+                    }
+
+                   
                 }
                 ?>
             </div>

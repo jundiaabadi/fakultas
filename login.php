@@ -1,6 +1,13 @@
 <?php
 session_start();
 include 'koneksi.php';
+// Fungsi untuk memeriksa apakah semua field telah diisi
+function validateForm($user, $pass) {
+    if (empty($user) || empty($pass)) {
+        return false;
+    }
+    return true;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,30 +50,35 @@ include 'koneksi.php';
                 </form>
 
                 <?php 
-                 if(isset($_POST['submit'])) {
-                    $user = mysqli_real_escape_string($conn, $_POST['user']);
-                    $pass = mysqli_real_escape_string($conn, $_POST['pass']);
-                    
-                    $cek = mysqli_query($conn, "SELECT * FROM pengguna WHERE username = '".$user."' ");
-                    if (mysqli_num_rows($cek) > 0) {
-                        $d = mysqli_fetch_object($cek);
-                        if(md5($pass) == $d->password) {
-                            $_SESSION['status_login'] = true;
-                            $_SESSION['uid']          = $d->id;    
-                            $_SESSION['uname']        = $d->nama;    
-                            $_SESSION['ulevel']       = $d->level;
+                    if (isset($_POST['submit'])) {
+                        $user = mysqli_real_escape_string($conn, $_POST['user']);
+                        $pass = mysqli_real_escape_string($conn, $_POST['pass']);
 
-                            echo '<div class="alert alert-success" role="alert">Login berhasil!</div>';
-                            echo "<script>window.location = 'admin/index.php'</script>";
-                         
-                        } else {
-                            echo '<div class="alert alert-warning" role="alert">Password yang anda masukkan salah!!</div>';
-                        }
+                    // Validasi form sebelum melakukan login
+                    if (!validateForm($user, $pass)) {
+                        echo '<div class="alert alert-warning" role="alert" style="margin-top: 5px">Harap isi semua field!</div>';
                     } else {
-                        echo '<div class="alert alert-warning" role="alert">Username yang anda masukkan salah!!</div>';
-                    };
-                 }
-                ?>
+                        $cek = mysqli_query($conn, "SELECT * FROM pengguna WHERE username = '".$user."' ");
+                        if (mysqli_num_rows($cek) > 0) {
+                            $d = mysqli_fetch_object($cek);
+                            if(md5($pass) == $d->password) {
+                                $_SESSION['status_login'] = true;
+                                $_SESSION['uid']          = $d->id;    
+                                $_SESSION['uname']        = $d->nama;    
+                                $_SESSION['ulevel']       = $d->level;
+
+                                echo '<div class="alert alert-success" role="alert" style="margin-top: 5px">Login berhasil!</div>';
+                                echo "<script>window.location = 'admin/index.php'</script>";
+                            
+                                    } else {
+                                        echo '<div class="alert alert-warning" role="alert" style="margin-top: 5px">Password Anda Salah!</div>';
+                                    }
+                                } else {
+                                    echo '<div class="alert alert-warning" role="alert" style="margin-top: 5px">Username yang anda masukkan salah!!</div>';
+                                }
+                            }
+                        }
+                        ?>
             </div>
             <div class="box-footer">
                 <a href="index.php">Halaman Utama</a>

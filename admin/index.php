@@ -1,18 +1,15 @@
 <?php
 include 'header.php'
+
 ?>
 <!-- Content -->
-<div class="content" style="min-height: 5000px;">
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header">
-                Dashboard
-            </div>
-            <div class="card-body">
-                <h3>Selamat Datang <?= $_SESSION['uname'] ?></h3>
-            </div>
+<div class="content">
+    <div class="container">
+        <div class="card-body mt-3">
+            <h3>Selamat Datang <?= $_SESSION['uname']  ?> Di Halaman Admin Fakultas <?= $unpri->nama ?> </h3>
         </div>
     </div>
+</div>
 </div>
 <!-- Content -->
 <?php
