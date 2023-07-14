@@ -28,6 +28,11 @@ include 'header.php';
                             placeholder="Masukkan Keterangan" aria-hidden="true"></textarea>
                     </div>
                     <div class="mb-3">
+                        <label for="sumber" class="form-label">Sumber</label>
+                        <input type="text" name="sumber" class="form-control" id="sumber"
+                            placeholder="Masukkan Link/Sumber" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="level" class="form-label">Gambar</label>
                         <input type="file" name="gambar" class="form-control" required>
                     </div>
@@ -41,6 +46,7 @@ include 'header.php';
                     // print_r($_FILES['gambar']);
                     $judul = addslashes(ucwords($_POST['judul']));
                     $ket = addslashes($_POST['keterangan']);
+                    $sumber = addslashes(ucwords($_POST['sumber']));
                     $filename = $_FILES['gambar']['name'];
                     $tmpname = $_FILES['gambar']['tmp_name'];
                     $filesize = $_FILES['gambar']['size'];
@@ -76,6 +82,7 @@ include 'header.php';
                         null,
                         '".$judul."',
                         '".$ket."',
+                        '".$sumber."',
                         '".$rename."',
                         null,
                         null,

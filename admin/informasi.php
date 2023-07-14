@@ -26,6 +26,7 @@ include 'header.php';
                             <th class="border">No</th>
                             <th class="border">Judul</th>
                             <th class="border">Keterangan</th>
+                            <th class="border">Sumber</th>
                             <th class="border">Gambar</th>
                             <th class="border">Aksi</th>
                         </tr>
@@ -42,8 +43,10 @@ include 'header.php';
                                 ?>
                         <tr class="text-center border">
                             <td class="border"><?= $no++ ?></td>
-                            <td class="border"><?= $p['judul'] ?></td>
-                            <td class="border"><?= $p['keterangan'] ?></td>
+                            <td class="border"><?= htmlspecialchars(substr(strip_tags($p['judul']), 0, 50)) ?>...</td>
+                            <td class="border"><?= htmlspecialchars(substr(strip_tags($p['keterangan']), 0, 50)) ?>...
+                            </td>
+                            <td class="border"><?= htmlspecialchars(substr(strip_tags($p['sumber']), 0, 50)) ?>...</td>
                             <td class="border"><img src="../uploads/informasi/<?= $p['gambar'] ?>" width="100px"></td>
                             <td class="border">
                                 <a href="edit-informasi.php?idinformasi=<?= $p['id'] ?>" class="text-decoration-none"

@@ -12,6 +12,7 @@ $unpri = mysqli_fetch_object($identitas);
 
 <head>
     <title>Dashboard Admin - <?= $unpri->nama ?></title>
+    <link rel="icon" href="../uploads/identitas/<?= $unpri->favicon ?>">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 
@@ -164,7 +165,7 @@ $unpri = mysqli_fetch_object($identitas);
                     alt="Logo">Fakultas Teknik - <?= $unpri->nama ?></h3>
             </a>
 
-            <button class="navbar-toggler bg-primary" type="button" data-bs-toggle="collapse"
+            <button class=" navbar-toggler bg-primary" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

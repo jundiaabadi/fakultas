@@ -1,0 +1,185 @@
+.nav-link {
+    font-size: 800px;
+}
+.images{
+    
+    width: 45%;
+    height: 50%;
+    position: absolute;
+    top: 10%;
+    bottom: 40%;
+    right: 50px;
+}
+.images img {
+    margin-top: 40px;
+    height: 100%;
+    position: absolute;
+    left: 60%;
+    top: 90px;
+    bottom: 40px;
+    transform: translateX(-50%);
+    transition: bottom 1s, left 3s;
+}
+
+.social-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, rgb(53, 155, 95), #3cf);
+    border-radius: 50%;
+    font-size: 60px;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 50px ;
+    margin-top: 50px;
+}
+.social-icon2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, rgb(53, 155, 95), #3cf);
+    border-radius: 50%;
+    font-size: 60px;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 270%;
+}
+.btn {
+    background: linear-gradient(45deg, rgb(53, 155, 95), #3cf);
+    border: none;
+    width: 30%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+ 
+}
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+}
+
+.whatsapp-float img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+.custom-hero-image {
+    margin-left: -150px; /* Adjust this value as needed to position the image */
+}
+
+
+.divider {
+    height: 3px;
+    background-color: #010101;
+    width: 5%;
+    margin: 0 auto;
+}
+.col-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 90%;
+}
+
+
+
+.thumbnail-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    text-align: center;
+}
+.thumbnail-box {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .thumbnail-link::before {
+        color:  #007bff;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        z-index: 1;
+        transition: border-color 0.3s ease;
+    }
+
+    .thumbnail-link:hover::before {
+        border-color: #007bff; /* Ubah warna sesuai kebutuhan */
+        color:  #007bff;
+    }
+    .card:hover .card-title,
+    .card:hover .card-text {
+        color: #007bff; /* Ubah warna sesuai kebutuhan */
+    }
+
+
+div [class^="col-"]{
+  padding-left:5px;
+  padding-right:5px;
+}
+.card{
+  transition:0.5s;
+  cursor:pointer;
+}
+.card-title{  
+  font-size:15px;
+  transition:1s;
+  cursor:pointer;
+}
+.card-title i{  
+  font-size:15px;
+  transition:1s;
+  cursor:pointer;
+  color:#ffa710
+}
+.card-title i:hover{
+  transform: scale(1.25) rotate(100deg); 
+  color:#18d4ca;
+  
+}
+.card:hover{
+ 
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+}
+.card-text{
+  height: 100%;  
+}
+
+.card::before, .card::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: scale3d(0, 0, 1);
+  transition: transform .3s ease-out 0s;
+  background: rgba(255, 255, 255, 0.1);
+  content: '';
+  pointer-events: none;
+}
+.card::before {
+  transform-origin: left top;
+}
+.card::after {
+  transform-origin: right bottom;
+}
+.card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+  transform: scale3d(1, 1, 1);
+}
